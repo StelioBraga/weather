@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailsActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="8dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:layout_gravity="center"
+                android:text="Maputo,MZ"
+                android:layout_marginTop="4dp"/>
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:layout_gravity="center"
+                android:text="12/15/2021"
+                android:layout_marginTop="4dp"/>
+            <ImageView
+                android:id="@+id/iv_weather_state"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_cloud_24" />
+            <TextView
+                android:id="@+id/tv_temperature_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:layout_gravity="center"
+                android:textSize="30sp"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:text="18 \u2103"/>
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_weather_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="clouds"
+                android:theme="@style/Theme.MaterialComponents.Light"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="4dp">
+            <TextView
+                android:id="@+id/tv_humidty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:textSize="14sp"
+                android:text="Maxima:"
+                android:textAppearance="?attr/textAppearanceHeadline6"/>
+            <TextView
+                android:id="@+id/tv_temperature_max"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:textSize="14sp"
+                android:text="14 \u2103"
+                android:textAppearance="?attr/textAppearanceHeadline6"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:textSize="14sp"
+                android:text="Minima:"
+                android:textAppearance="?attr/textAppearanceHeadline6"/>
+            <TextView
+                android:id="@+id/tv_temperature_min"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="20 \u2103"
+                android:textAppearance="?attr/textAppearanceHeadline6"/>
+        </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="1dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp">
+                <TextView
+                    android:id="@+id/tv_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="Detailes"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="12dp"
+                    android:textAppearance="?attr/textAppearanceHeadline6"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/tv_details"
+                    android:layout_marginTop="4dp"
+                    android:textSize="14sp"
+                    android:text="Velocidade do Vento :"/>
+
+                <TextView
+                    android:id="@+id/tv_speed_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_details"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="6dp"
+                    android:text="12 km/"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="?attr/textAppearanceHeadline2"
+                    android:textSize="14sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_speed_state"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="6dp"
+                    android:textSize="14sp"
+                    android:text="Humidade :"/>
+                <TextView
+                    android:id="@+id/tv_humidity_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_speed_state"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:text="12 km/h"
+                    android:textAppearance="?attr/textAppearanceHeadline6"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_humidity_state"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="6dp"
+                    android:textSize="14sp"
+                    android:text="Pressão :"/>
+                <TextView
+                    android:id="@+id/tv_pressure_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_humidity_state"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:text="12 km/h"
+                    android:textAppearance="?attr/textAppearanceHeadline6"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_pressure_state"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="6dp"
+                    android:textSize="14sp"
+                    android:text="Nascer/Por do Sol :" />
+                <TextView
+                    android:id="@+id/tv_sun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_pressure_state"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="6dp"
+                    android:textSize="14sp"
+                    android:textAlignment="textEnd"
+                    android:text="12 km"
+                    android:textAppearance="?attr/textAppearanceHeadline6"/>
+            </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="openweathermap.org"
+                android:layout_gravity="bottom|center"/>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

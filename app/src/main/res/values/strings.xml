@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="celsius">"\u2103"</string>
+    <string name="degree">"\u00B0"</string>
+    <string name="percentage">%</string>
+    <string name="speed_kilometre">Km/h</string>
+</resources>
