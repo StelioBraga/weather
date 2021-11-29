@@ -15,6 +15,7 @@ import com.mz.weather.DetailsActivity;
 import com.mz.weather.model.ResponseWeather;
 import com.mz.weather.model.Weatherss;
 import com.mz.weather.R;
+import com.mz.weather.service.GetWeatherIcon;
 
 import java.util.List;
 
@@ -22,8 +23,8 @@ public class WeatherAdapter  extends RecyclerView.Adapter<WeatherAdapter.Adapter
     private List<ResponseWeather> responseWeatherList;
     private Context context;
 
-    public WeatherAdapter(Context mctx, List list){
-        this.context = mctx;
+    public WeatherAdapter(Context context, List list){
+        this.context = context;
         this.responseWeatherList = list;
     }
     @NonNull
@@ -42,7 +43,8 @@ public class WeatherAdapter  extends RecyclerView.Adapter<WeatherAdapter.Adapter
         holder.tv_city.setText(responseWeather.getCity());
         holder.tv_country.setText(responseWeather.getSys().getCountry());
         holder.tv_wind_speed.setText(responseWeather.getWind().getSpeed() + "Km/h");
-//        holder.iv_weather_ion.setImageURI(weather.getWheather_icon());
+        String icon =  responseWeather.getWeather().get(0).getIcon();
+        new  GetWeatherIcon(context,icon,holder.iv_weather_icon);
 
     }
 
@@ -57,7 +59,7 @@ public class WeatherAdapter  extends RecyclerView.Adapter<WeatherAdapter.Adapter
         TextView tv_city;
         TextView tv_country;
         TextView tv_wind_speed;
-        ImageView iv_weather_ion;
+        ImageView iv_weather_icon;
 
         public AdapterWeatherViewholder(@NonNull View itemView, WeatherAdapter weatherAdapter) {
             super(itemView);
@@ -66,7 +68,7 @@ public class WeatherAdapter  extends RecyclerView.Adapter<WeatherAdapter.Adapter
             tv_city = itemView.findViewById(R.id.tv_city);
             tv_country = itemView.findViewById(R.id.tv_country);
             tv_wind_speed = itemView.findViewById(R.id.tv_wind_speed);
-            iv_weather_ion = itemView.findViewById(R.id.iv_weather);
+            iv_weather_icon = itemView.findViewById(R.id.iv_weather);
             itemView.setOnClickListener(this);
         }
 
