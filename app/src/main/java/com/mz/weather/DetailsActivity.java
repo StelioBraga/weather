@@ -8,22 +8,29 @@ import android.widget.TextView;
 
 import com.google.android.material.chip.Chip;
 import com.mz.weather.model.ResponseWeather;
-import com.mz.weather.service.OpenImge;
+import com.mz.weather.service.GetWeatherIcon;
+
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
 
 public class DetailsActivity extends AppCompatActivity {
     TextView tv_location, tv_date, tv_temperature, tv_temperature_max, tv_temperature_min, tv_humidity, tv_pressure, tv_wind_speed, tv_sun;
     ImageView iv_state;
     Chip chip_weather_state;
-    String photo_url_str = "http://openweathermap.org/img/wn/02d@2x.png";
+    private String hourFormat = "HH:mm:ss";
+    private String dayFormat = "dd/MM/yy";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+
+        // change app title
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Detalhes");
 
         // inicialization
         tv_location = findViewById(R.id.tv_location);
@@ -38,32 +45,48 @@ public class DetailsActivity extends AppCompatActivity {
         iv_state = findViewById(R.id.iv_weather_state);
         tv_sun = findViewById(R.id.tv_sun);
 
-
+        //  get and set data on view
         ResponseWeather responseWeather = (ResponseWeather) getIntent().getSerializableExtra("weather");
+
+        //check if weather exists
         if (responseWeather != null) {
-            tv_location.setText(responseWeather.getCity() + ", " + responseWeather.getSys().getCountry());
-            tv_temperature.setText(String.valueOf(Math.round(responseWeather.getMain().getTemp()) + "\u2103"));
-            tv_temperature_max.setText(String.valueOf(Math.round(responseWeather.getMain().getTemp_max()) + "\u2103"));
-            tv_temperature_min.setText(String.valueOf(Math.round(responseWeather.getMain().getTemp_min()) + "\u2103"));
-            tv_humidity.setText(String.valueOf(responseWeather.getMain().getHumidity() + "%"));
-            tv_pressure.setText(String.valueOf(responseWeather.getMain().getPressure()));
-            tv_wind_speed.setText(String.valueOf(responseWeather.getWind().getSpeed() + "km/h"));
-            chip_weather_state.setText(responseWeather.getWeather().get(0).getDescription());
-            new OpenImge(photo_url_str, iv_state);
-            String sunrise =  convertDate(responseWeather.getSys().getSunrise());
-            String sunset =  convertDate(responseWeather.getSys().getSunset());
+            String location  = responseWeather.getCity() + ", " + responseWeather.getSys().getCountry();
+            String temperature = Math.round(responseWeather.getMain().getTemp()) + getResources().getString(R.string.degree);
+            String temperatureMax = Math.round(responseWeather.getMain().getTemp_max()) + getResources().getString(R.string.degree);
+            String temperatureMin = Math.round(responseWeather.getMain().getTemp_min()) + getResources().getString(R.string.celsius);
+            String humidity = responseWeather.getMain().getHumidity() + getResources().getString(R.string.celsius);
+            String pressure = responseWeather.getMain().getPressure() + getResources().getString(R.string.pressure);
+            String wind = responseWeather.getWind().getSpeed() + getResources().getString(R.string.speed_kilometre);
+            String description = responseWeather.getWeather().get(0).getDescription();
+            String day = convertDate(responseWeather.getDt(),dayFormat);
+            String sunrise =  convertDate(responseWeather.getSys().getSunrise(),hourFormat);
+            String sunset =  convertDate(responseWeather.getSys().getSunset(),hourFormat);
             String sun = sunrise +"/"+ sunset;
+            String icon = responseWeather.getWeather().get(0).getIcon();
+
+            tv_location.setText(location);
+            tv_temperature.setText(temperature);
+            tv_temperature_max.setText(temperatureMax);
+            tv_temperature_min.setText(temperatureMin);
+            tv_humidity.setText(humidity);
+            tv_pressure.setText(pressure);
+            tv_wind_speed.setText(wind);
+            chip_weather_state.setText(description);
+            tv_date.setText(day);
             tv_sun.setText(sun);
+            new GetWeatherIcon(this,icon,iv_state);
         }
 
-
     }
 
-    public String convertDate(long currentTime){
-        String time = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date(currentTime));
 
-
-        return  time;
+    // convert the timestamp
+    public String convertDate(long currentTime, String timeFormat){
+        int milliseconds = 1000;
+        Date date = new Date(currentTime * milliseconds);
+        String time = new SimpleDateFormat(timeFormat, Locale.getDefault()).format(date);
+        return time;
     }
+
 
 }

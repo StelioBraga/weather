@@ -66,6 +66,7 @@ public class ResponseWeather implements Serializable {
     }
 
     public long getDt() {
+
         return dt;
     }
 
