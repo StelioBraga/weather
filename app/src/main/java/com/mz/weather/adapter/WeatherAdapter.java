@@ -74,8 +74,8 @@ public class WeatherAdapter  extends RecyclerView.Adapter<WeatherAdapter.Adapter
 
         @Override
         public void onClick(View v) {
-        ResponseWeather weatherss = responseWeatherList.get(getAdapterPosition());
-        context.startActivity(new Intent(context, DetailsActivity.class).putExtra("weather",weatherss));
+        ResponseWeather weather = responseWeatherList.get(getAdapterPosition());
+        context.startActivity(new Intent(context, DetailsActivity.class).putExtra("weather",weather));
         }
     }
 }

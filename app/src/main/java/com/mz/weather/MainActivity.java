@@ -25,7 +25,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-
+    private WeatherAdapter weatherAdapter;
     RecyclerView rv_weather ;
     public List<ResponseWeather> responseWeatherList = new ArrayList<>();
     Context context;
@@ -43,9 +43,19 @@ public class MainActivity extends AppCompatActivity {
         context = this;
         rv_weather = findViewById(R.id.rv_wheather);
 
+        // define weather
+        getWeather();
+
+
+    }
+    private void setRecyclerView(){
         // set list layout style grid
         rv_weather.setLayoutManager(new GridLayoutManager(context, 2) );
+        rv_weather.setAdapter(weatherAdapter);
+        weatherAdapter.notifyDataSetChanged();
+    }
 
+    private void getWeather(){
         // get data weather api
         WeatherAPIService weatherAPIService = WeatherAPIClient
                 .getRetrofit().create(WeatherAPIService.class);
@@ -58,11 +68,8 @@ public class MainActivity extends AppCompatActivity {
                     if (response.code() == 200) {
                         ResponseWeather responseWeather = response.body();
                         responseWeatherList.add(responseWeather);
-                         // TODO
-                        // rv
-                        WeatherAdapter weatherAdapter = new WeatherAdapter(context, responseWeatherList);
-                        rv_weather.setAdapter(weatherAdapter);
-                        weatherAdapter.notifyDataSetChanged();
+                        weatherAdapter = new WeatherAdapter(context, responseWeatherList);
+                        setRecyclerView();
                     }
                 }
                 @Override
@@ -70,8 +77,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-
     }
 
 }
- // total 36 hours

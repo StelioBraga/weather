@@ -45,9 +45,12 @@ public class DetailsActivity extends AppCompatActivity {
         iv_state = findViewById(R.id.iv_weather_state);
         tv_sun = findViewById(R.id.tv_sun);
 
-        //  get and set data on view
-        ResponseWeather responseWeather = (ResponseWeather) getIntent().getSerializableExtra("weather");
+        //get data from old screen
+        ResponseWeather  responseWeather = (ResponseWeather) getIntent().getSerializableExtra("weather");
+        getWeatherDetails(responseWeather);
+    }
 
+    public void getWeatherDetails(ResponseWeather responseWeather){
         //check if weather exists
         if (responseWeather != null) {
             String location  = responseWeather.getCity() + ", " + responseWeather.getSys().getCountry();
@@ -78,7 +81,6 @@ public class DetailsActivity extends AppCompatActivity {
         }
 
     }
-
 
     // convert the timestamp
     public String convertDate(long currentTime, String timeFormat){
