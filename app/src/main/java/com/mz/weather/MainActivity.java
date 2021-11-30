@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         // change app title
         Objects.requireNonNull(getSupportActionBar()).setTitle("Tempo");
 
-        // inicialization
+        // initialization
         context = this;
         rv_weather = findViewById(R.id.rv_wheather);
 
@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
         WeatherAPIService weatherAPIService = WeatherAPIClient
                 .getRetrofit().create(WeatherAPIService.class);
         for (String  city : cities) {
-            Call<ResponseWeather> weathers = weatherAPIService.listWeather(city);
-            weathers.enqueue(new Callback<ResponseWeather>() {
+            Call<ResponseWeather> weather = weatherAPIService.getWeather(city);
+            weather.enqueue(new Callback<ResponseWeather>() {
                 @Override
                 public void onResponse(Call<ResponseWeather> call, @NotNull Response<ResponseWeather> response) {
 
@@ -71,19 +71,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-        Log.v("size", String.valueOf(responseWeatherList.size()));
-        Toast.makeText(context,String.valueOf(responseWeatherList.size()), Toast.LENGTH_SHORT).show();
     }
 
 }
-
-// hours 19 - 01
-//  30min
-// 19 - 2
-// 9 - 1
-   // 12 -18
-//  \u2103 => C
-// \u00B0 degree
-
-// get url icon
-//http://openweathermap.org/img/wn/02d@2x.png
+ // total 36 hours

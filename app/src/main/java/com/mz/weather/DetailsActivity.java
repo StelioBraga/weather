@@ -32,7 +32,7 @@ public class DetailsActivity extends AppCompatActivity {
         // change app title
         Objects.requireNonNull(getSupportActionBar()).setTitle("Detalhes");
 
-        // inicialization
+        // initialization
         tv_location = findViewById(R.id.tv_location);
         tv_temperature = findViewById(R.id.tv_temperature_state);
         tv_temperature_max = findViewById(R.id.tv_temperature_max);

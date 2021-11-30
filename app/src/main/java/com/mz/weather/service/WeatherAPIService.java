@@ -11,5 +11,5 @@ import retrofit2.http.Query;
 
 public interface WeatherAPIService {
     @GET("/data/2.5/weather?&appid=6b7fb460503b8e1af85c00d04ab82e31&&units=metric&lang=pt")
-    Call<ResponseWeather> listWeather(@Query("q") String city);
+    Call<ResponseWeather> getWeather(@Query("q") String city);
 }

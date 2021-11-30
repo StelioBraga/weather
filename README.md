@@ -1,10 +1,9 @@
 ## Weather
 
-This is an Android application that aims to show the current weather status of some cities.
+Android app that to show current weather for some selected cities
 
-This app
- was developed using the native language for android (java) which gets the data from an API called
- [OpenWeather](https://openweathermap.org/), that provides the weather.
+Developed using Android native language (Java) and powered by
+ [OpenWeather's Weather API](https://openweathermap.org/).
 
  
 
