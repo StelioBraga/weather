@@ -56,7 +56,7 @@ public class DetailsActivity extends AppCompatActivity {
             String temperature = Math.round(responseWeather.getMain().getTemp()) + getResources().getString(R.string.degree);
             String temperatureMax = Math.round(responseWeather.getMain().getTemp_max()) + getResources().getString(R.string.degree);
             String temperatureMin = Math.round(responseWeather.getMain().getTemp_min()) + getResources().getString(R.string.celsius);
-            String humidity = responseWeather.getMain().getHumidity() + getResources().getString(R.string.pressure);
+            String humidity = responseWeather.getMain().getHumidity() + getResources().getString(R.string.percentage);
             String pressure = responseWeather.getMain().getPressure() + getResources().getString(R.string.pressure);
             String wind = responseWeather.getWind().getSpeed() + getResources().getString(R.string.speed_kilometre);
             String description = responseWeather.getWeather().get(0).getDescription();

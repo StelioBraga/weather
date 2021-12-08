@@ -55,7 +55,7 @@ public class WeatherAdapter  extends RecyclerView.Adapter<WeatherAdapter.Adapter
     public class AdapterWeatherViewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tv_temperature;
         TextView tv_humidity;
-        TextView tv_city; 
+        TextView tv_city;
         TextView tv_country;
         TextView tv_wind_speed;
         ImageView iv_weather_icon;
