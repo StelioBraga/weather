@@ -1,4 +1,4 @@
-package com.mz.weather.service;
+package com.mz.weather.util;
 
 import android.content.Context;
 import android.widget.ImageView;

@@ -1,4 +1,4 @@
-package com.mz.weather.service;
+package com.mz.weather.Api;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
