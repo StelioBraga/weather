@@ -7,7 +7,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.util.Log;
 
-public class Network {
+public class NetworkUtils {
 
      public static boolean isNetWorkAvailable (Context context){
         ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));

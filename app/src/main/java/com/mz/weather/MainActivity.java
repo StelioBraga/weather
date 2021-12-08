@@ -2,34 +2,29 @@ package com.mz.weather;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mz.weather.adapter.WeatherAdapter;
 import com.mz.weather.model.ResponseWeather;
-import com.mz.weather.service.WeatherAPIClient;
-import com.mz.weather.service.WeatherAPIService;
-
-import org.jetbrains.annotations.NotNull;
+import com.mz.weather.utils.NetworkUtils;
+import com.mz.weather.viewmodel.WeatherViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class MainActivity extends AppCompatActivity {
     private WeatherAdapter weatherAdapter;
     RecyclerView rv_weather ;
+    TextView no_weather;
     public List<ResponseWeather> responseWeatherList = new ArrayList<>();
     Context context;
-    private String[]  cities = {"Inhambane","Lisboa", "Madrid", "Paris", "Berlim", "Copenhaga", "Roma", "Londres", "Dublin", "Praga", "Viena"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,41 +37,32 @@ public class MainActivity extends AppCompatActivity {
         // initialization
         context = this;
         rv_weather = findViewById(R.id.rv_wheather);
+        no_weather = findViewById(R.id.tv_empty_weather);
+        boolean netWorkAvailable = NetworkUtils.isNetWorkAvailable(context);
 
-        // define weather
-        getWeather();
+        WeatherViewModel weatherViewModel = new WeatherViewModel();
+        weatherViewModel.getCurrentWeather().observe(this, new Observer<ResponseWeather>() {
+            @Override
+            public void onChanged(ResponseWeather responseWeather) {
+                responseWeatherList.add(responseWeather);
+                weatherAdapter = new WeatherAdapter(context, responseWeatherList);
+                if (netWorkAvailable){
+                    setRecyclerView();
+                    no_weather.setVisibility(View.GONE);
+                }else {
+                    no_weather.setText("Verifica a conexão com a internet");
+                    no_weather.setVisibility(View.VISIBLE);
+                }
 
-
+            }
+        });
     }
+
     private void setRecyclerView(){
         // set list layout style grid
         rv_weather.setLayoutManager(new GridLayoutManager(context, 2) );
         rv_weather.setAdapter(weatherAdapter);
         weatherAdapter.notifyDataSetChanged();
-    }
-
-    private void getWeather(){
-        // get data weather api
-        WeatherAPIService weatherAPIService = WeatherAPIClient
-                .getRetrofit().create(WeatherAPIService.class);
-        for (String  city : cities) {
-            Call<ResponseWeather> weather = weatherAPIService.getWeather(city);
-            weather.enqueue(new Callback<ResponseWeather>() {
-                @Override
-                public void onResponse(Call<ResponseWeather> call, @NotNull Response<ResponseWeather> response) {
-
-                    if (response.code() == 200) {
-                        ResponseWeather responseWeather = response.body();
-                        responseWeatherList.add(responseWeather);
-                        weatherAdapter = new WeatherAdapter(context, responseWeatherList);
-                        setRecyclerView();
-                    }
-                }
-                @Override
-                public void onFailure(Call<ResponseWeather> call, Throwable t) {
-                }
-            });
-        }
     }
 
 }

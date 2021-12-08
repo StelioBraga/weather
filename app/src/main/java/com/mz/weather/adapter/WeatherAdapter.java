@@ -13,9 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mz.weather.DetailsActivity;
 import com.mz.weather.model.ResponseWeather;
-import com.mz.weather.model.Weatherss;
 import com.mz.weather.R;
-import com.mz.weather.service.GetWeatherIcon;
+import com.mz.weather.utils.GetWeatherIcon;
 
 import java.util.List;
 
@@ -56,7 +55,7 @@ public class WeatherAdapter  extends RecyclerView.Adapter<WeatherAdapter.Adapter
     public class AdapterWeatherViewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tv_temperature;
         TextView tv_humidity;
-        TextView tv_city;
+        TextView tv_city; 
         TextView tv_country;
         TextView tv_wind_speed;
         ImageView iv_weather_icon;

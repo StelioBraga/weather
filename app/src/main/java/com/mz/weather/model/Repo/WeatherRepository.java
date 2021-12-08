@@ -1,4 +1,4 @@
-package com.mz.weather.Repo;
+package com.mz.weather.model.Repo;
 
 import android.util.Log;
 
