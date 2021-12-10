@@ -50,6 +50,8 @@
                 android:id="@+id/chip_weather_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:clickable="false"
                 android:text="clouds"
                 android:theme="@style/Theme.MaterialComponents.Light"/>
         </LinearLayout>
@@ -103,7 +105,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:text="Mais informação"
+                    android:text="Mais informações"
                     android:textSize="18sp"
                     android:layout_marginBottom="12dp"
                     android:textAppearance="?attr/textAppearanceHeadline6"/>
