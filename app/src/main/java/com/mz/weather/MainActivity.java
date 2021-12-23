@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -32,7 +33,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // change app title
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Tempo");
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null){
+            setTitle("Tempo");
+        }
 
         // initialization
         context = this;
@@ -41,20 +45,17 @@ public class MainActivity extends AppCompatActivity {
         boolean netWorkAvailable = NetworkUtils.isNetWorkAvailable(context);
 
         WeatherViewModel weatherViewModel = new WeatherViewModel();
-        weatherViewModel.getCurrentWeather().observe(this, new Observer<ResponseWeather>() {
-            @Override
-            public void onChanged(ResponseWeather responseWeather) {
-                responseWeatherList.add(responseWeather);
-                weatherAdapter = new WeatherAdapter(context, responseWeatherList);
-                if (netWorkAvailable){
-                    setRecyclerView();
-                    no_weather.setVisibility(View.GONE);
-                }else {
-                    no_weather.setText("Verifica a conexão com a internet");
-                    no_weather.setVisibility(View.VISIBLE);
-                }
-
+        weatherViewModel.getCurrentWeather().observe(this, responseWeather -> {
+            responseWeatherList.add(responseWeather);
+            weatherAdapter = new WeatherAdapter(context, responseWeatherList);
+            if (netWorkAvailable){
+                setRecyclerView();
+                no_weather.setVisibility(View.GONE);
+            }else {
+                no_weather.setText("Verifica a conexão com a internet");
+                no_weather.setVisibility(View.VISIBLE);
             }
+
         });
     }
 

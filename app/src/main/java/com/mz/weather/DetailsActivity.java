@@ -1,5 +1,6 @@
 package com.mz.weather;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -29,7 +30,10 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
 
         // change app title
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Detalhes");
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null){
+            setTitle("Detalhes");
+        }
 
         // initialization
         tv_location = findViewById(R.id.tv_location);
