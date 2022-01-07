@@ -1,4 +1,4 @@
-package com.mz.weather.service;
+package com.mz.weather.Api;
 
 import com.mz.weather.model.ResponseWeather;
 

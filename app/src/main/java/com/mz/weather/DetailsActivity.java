@@ -1,5 +1,6 @@
 package com.mz.weather;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -8,13 +9,12 @@ import android.widget.TextView;
 
 import com.google.android.material.chip.Chip;
 import com.mz.weather.model.ResponseWeather;
-import com.mz.weather.service.GetWeatherIcon;
+import com.mz.weather.utils.GetWeatherIcon;
 
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Objects;
 
 public class DetailsActivity extends AppCompatActivity {
@@ -30,7 +30,10 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
 
         // change app title
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Detalhes");
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null){
+            setTitle("Detalhes");
+        }
 
         // initialization
         tv_location = findViewById(R.id.tv_location);
@@ -57,7 +60,7 @@ public class DetailsActivity extends AppCompatActivity {
             String temperature = Math.round(responseWeather.getMain().getTemp()) + getResources().getString(R.string.degree);
             String temperatureMax = Math.round(responseWeather.getMain().getTemp_max()) + getResources().getString(R.string.degree);
             String temperatureMin = Math.round(responseWeather.getMain().getTemp_min()) + getResources().getString(R.string.celsius);
-            String humidity = responseWeather.getMain().getHumidity() + getResources().getString(R.string.celsius);
+            String humidity = responseWeather.getMain().getHumidity() + getResources().getString(R.string.percentage);
             String pressure = responseWeather.getMain().getPressure() + getResources().getString(R.string.pressure);
             String wind = responseWeather.getWind().getSpeed() + getResources().getString(R.string.speed_kilometre);
             String description = responseWeather.getWeather().get(0).getDescription();
